@@ -263,8 +263,6 @@
       icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
     }
 
-    
-
     // Add click event handler.
     wrapper.addEventListener('click', function() {
       switchScene(findSceneById(hotspot.target));
