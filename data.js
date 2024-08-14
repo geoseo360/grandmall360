@@ -61,8 +61,8 @@ var APP_DATA = {
           "title": "Title",
           "text": "Text"
         }
+
         logo: "img/berghoff.png"
-        
       ]
     },
     {
@@ -114,7 +114,6 @@ var APP_DATA = {
           "title": "Title",
           "text": "Text"
         }
-        logo: "img/berghoff.png"
       ]
     },
     {
