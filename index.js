@@ -263,6 +263,40 @@
       icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
     }
 
+    function switchToScene(scene) {
+  // Переключение на новую сцену
+  viewer.loadScene(scene.id);
+
+  // Получаем элемент логотипа или создаем его, если он не существует
+  var logoElement = document.getElementById('scene-logo');
+  if (!logoElement) {
+    logoElement = document.createElement('img');
+    logoElement.id = 'scene-logo';
+    logoElement.style.position = 'absolute';
+    logoElement.style.top = '20px';  // Положение логотипа
+    logoElement.style.left = '20px'; // Положение логотипа
+    logoElement.style.width = '150px'; // Размер логотипа
+    document.body.appendChild(logoElement);
+  }
+
+  // Устанавливаем логотип для текущей сцены
+  logoElement.src = scene.logo;
+}
+
+// Пример вызова функции при выборе сцены
+document.querySelectorAll('.scene-selector').forEach(function(element) {
+  element.addEventListener('click', function() {
+    var sceneId = element.getAttribute('data-scene-id');
+    var selectedScene = scenes.find(function(scene) {
+      return scene.id === sceneId;
+    });
+    if (selectedScene) {
+      switchToScene(selectedScene);
+    }
+  });
+});
+
+
     // Add click event handler.
     wrapper.addEventListener('click', function() {
       switchScene(findSceneById(hotspot.target));
