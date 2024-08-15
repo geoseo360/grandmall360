@@ -388,23 +388,146 @@
 
   // Display the initial scene.
   switchScene(scenes[0]);
-document.addEventListener('DOMContentLoaded', function() {
-    const sceneElements = document.querySelectorAll('.scene');
-    sceneElements.forEach(element => {
-        element.addEventListener('click', function() {
-            const sceneId = this.getAttribute('data-id');
-            // Replace this with the logic to switch scenes
-            console.log('Switching to scene:', sceneId);
-        });
+
+}
+
+(function() {
+  var Marzipano = window.Marzipano;
+  var bowser = window.bowser;
+  var screenfull = window.screenfull;
+  var data = window.APP_DATA;
+
+  var panoElement = document.querySelector('#pano');
+  var sceneListToggleElement = document.querySelector('#sceneListToggle');
+  var autorotateToggleElement = document.querySelector('#autorotateToggle');
+  var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
+  var menuElement = document.querySelector('#menu');
+  var menuCloseElement = document.querySelector('#menuClose');
+
+  var viewerOpts = {
+    controls: {
+      mouseViewMode: data.settings.mouseViewMode
+    }
+  };
+
+  var viewer = new Marzipano.Viewer(panoElement, viewerOpts);
+
+  var scenes = data.scenes.map(function(data) {
+    var urlPrefix = "tiles";
+    var source = Marzipano.ImageUrlSource.fromString(
+      urlPrefix + "/" + data.id + "/{z}/{f}/{y}/{x}.jpg",
+      { cubeMapPreviewUrl: urlPrefix + "/" + data.id + "/preview.jpg" });
+    var geometry = new Marzipano.CubeGeometry(data.levels);
+    var limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
+    var view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
+    var scene = viewer.createScene({
+      source: source,
+      geometry: geometry,
+      view: view,
+      pinFirstLevel: true
     });
 
-    // Optional: Toggle menu visibility
-    const menuToggle = document.getElementById('menuToggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            document.getElementById('menu').classList.toggle('open');
-        });
-    }
-});
+    data.linkHotspots.forEach(function(hotspot) {
+      var element = createLinkHotspotElement(hotspot);
+      scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
+    });
 
+    data.infoHotspots.forEach(function(hotspot) {
+      var element = createInfoHotspotElement(hotspot);
+      scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
+    });
+
+    return {
+      data: data,
+      scene: scene,
+      view: view
+    };
+  });
+
+  var autorotate = Marzipano.autorotate({
+    yawSpeed: 0.03,
+    targetPitch: 0,
+    targetFov: Math.PI/2
+  });
+  if (data.settings.autorotateEnabled) {
+    autorotateToggleElement.classList.add('enabled');
+  }
+
+  autorotateToggleElement.addEventListener('click', toggleAutorotate);
+
+  if (screenfull.enabled && data.settings.fullscreenButton) {
+    document.body.classList.add('fullscreen-enabled');
+    fullscreenToggleElement.addEventListener('click', function() {
+      screenfull.toggle();
+    });
+    screenfull.on('change', function() {
+      if (screenfull.isFullscreen) {
+        fullscreenToggleElement.classList.add('enabled');
+      } else {
+        fullscreenToggleElement.classList.remove('enabled');
+      }
+    });
+  } else {
+    document.body.classList.add('fullscreen-disabled');
+  }
+
+  sceneListToggleElement.addEventListener('click', function() {
+    menuElement.style.display = 'flex';
+  });
+
+  menuCloseElement.addEventListener('click', function() {
+    menuElement.style.display = 'none';
+  });
+
+  scenes.forEach(function(scene) {
+    var el = document.querySelector('#menu .menu-items a[href="#' + scene.data.id + '"]');
+    el.addEventListener('click', function() {
+      switchScene(scene);
+      menuElement.style.display = 'none';
+    });
+  });
+
+  function switchScene(scene) {
+    viewer.switchScene(scene.scene);
+  }
+
+  function toggleAutorotate() {
+    if (autorotate.isRunning()) {
+      autorotate.stop();
+      autorotateToggleElement.classList.remove('enabled');
+    } else {
+      autorotate.start(viewer);
+      autorotateToggleElement.classList.add('enabled');
+    }
+  }
+
+  function createLinkHotspotElement(hotspot) {
+    var element = document.createElement('div');
+    element.className = 'hotspot link';
+    element.addEventListener('click', function() {
+      var targetScene = scenes.find(function(scene) {
+        return scene.data.id === hotspot.target;
+      });
+      if (targetScene) {
+        switchScene(targetScene);
+      }
+    });
+    return element;
+  }
+
+  function createInfoHotspotElement(hotspot) {
+    var element = document.createElement('div');
+    element.className = 'hotspot info';
+    var title = document.createElement('div');
+    title.className = 'hotspot-title';
+    title.textContent = hotspot.title || '';
+    var text = document.createElement('div');
+    text.className = 'hotspot-text';
+    text.textContent = hotspot.text || '';
+    element.appendChild(title);
+    element.appendChild(text);
+    return element;
+  }
 })();
+
+)();

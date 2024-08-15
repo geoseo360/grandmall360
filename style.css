@@ -829,100 +829,132 @@ body.view-control-buttons .viewControlButton {
   margin-left: 105px;
 }
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
-#menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1000; /* Ensure menu is above other content */
-    overflow-y: auto;
+.pano {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }
 
- #logo img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain; /* Обеспечивает сохранение пропорций изображения */
-        }
-
-
-#logo {
-    margin: 20px 0;
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
 }
 
-#logo img {
-    max-width: 80%;
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #444;
 }
 
-.main-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+.menu-header .logo {
+  height: 40px;
 }
 
-.main-menu > li {
-    position: relative;
+.menu-close {
+  font-size: 24px;
+  cursor: pointer;
 }
 
-.main-menu > li > a {
-    display: block;
-    padding: 15px;
-    color: white;
-    text-decoration: none;
-    background-color: #333;
-    border-bottom: 1px solid #444;
+.menu-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.main-menu > li > a:hover {
-    background-color: #555;
+.menu-items li {
+  padding: 15px;
 }
 
-.sub-menu {
-    display: none;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    width: 200px;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1001;
+.menu-items a {
+  color: white;
+  text-decoration: none;
 }
 
-.sub-menu > li {
-    border-bottom: 1px solid #444;
+.menu-items a:hover {
+  text-decoration: underline;
 }
 
-.sub-menu > li > a {
-    padding: 10px;
-    color: white;
-    text-decoration: none;
-    background-color: #444;
+.control-button {
+  position: absolute;
+  top: 10px;
+  background: #333;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
 }
 
-.sub-menu > li > a:hover {
-    background-color: #666;
+#sceneListToggle {
+  left: 10px;
 }
 
-.main-menu > li:hover .sub-menu {
-    display: block;
+#autorotateToggle {
+  left: 100px;
 }
 
-#pano {
-    margin-left: 250px; /* Adjust based on menu width */
-    width: calc(100% - 250px);
-    height: 100vh;
+#fullscreenToggle {
+  left: 200px;
 }
 
-/* Existing styles for other elements (buttons, icons, etc.) */
+.messenger-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.messenger-icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+/* Полупрозрачный фон меню */
+.menu {
+  background-color: rgba(0, 0, 0, 0.5); /* Черный цвет с прозрачностью 50% */
+  padding: 10px;
+  border-radius: 10px; /* Радиус углов */
+}
+
+/* Логотип в меню */
+.menu-header .logo {
+  display: block;
+  margin: 0 auto;
+  max-width: 100px; /* Размер логотипа */
+  opacity: 0.9; /* Легкая прозрачность логотипа */
+}
+/* Вертикальное расположение иконок мессенджеров в правом нижнем углу */
+.vertical-messengers {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messenger-icon {
+  width: 50px;
+  height: 50px;
+  opacity: 0.8; /* Легкая прозрачность */
+  transition: opacity 0.3s ease;
+}
+
+.messenger-icon:hover {
+  opacity: 1;
+}
+
+
