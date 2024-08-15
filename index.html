@@ -7,8 +7,74 @@
     <style> @-ms-viewport { width: device-width; } </style>
     <link rel="stylesheet" href="vendor/reset.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Логотип размером 100x100 пикселей */
+        #logo img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        /* Стили для меню и других элементов */
+        #menu {
+            background-color: #fff;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+
+        .main-menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .main-menu li {
+            margin: 0;
+        }
+
+        .main-menu a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 10px;
+        }
+
+        .main-menu .sub-menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: none; /* Скрыто по умолчанию */
+        }
+
+        .main-menu li:hover .sub-menu {
+            display: block; /* Показать подменю при наведении */
+        }
+
+        /* Стиль для кнопки скрытия меню */
+        #menuToggleButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+        /* Стили для скрытого состояния меню */
+        #menu.hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body class="multiple-scenes view-control-buttons">
+
+    <!-- Button to toggle menu visibility -->
+    <button id="menuToggleButton">Menu</button>
 
     <!-- Menu with logo and scenes -->
     <div id="menu">
@@ -18,7 +84,7 @@
         <ul class="main-menu">
             <!-- Menu for scenes -->
             <li>
-                <a href="#" id="menuToggle">Scenes</a>
+                <a href="#" id="sceneMenuToggle">Scenes</a>
                 <ul class="sub-menu" id="sceneList">
                     <li><a href="javascript:void(0)" class="scene" data-id="0-3rd-floor">3rd floor</a></li>
                     <li><a href="javascript:void(0)" class="scene" data-id="1-berghoff-store">BergHOFF store</a></li>
@@ -81,5 +147,17 @@
     <script src="vendor/marzipano.js"></script>
     <script src="data.js"></script>
     <script src="index.js"></script>
+
+    <script>
+        // JavaScript to toggle menu visibility
+        document.getElementById('menuToggleButton').addEventListener('click', function() {
+            var menu = document.getElementById('menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
