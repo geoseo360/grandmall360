@@ -848,6 +848,13 @@ body {
     overflow-y: auto;
 }
 
+ #logo img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain; /* Обеспечивает сохранение пропорций изображения */
+        }
+
+
 #logo {
     margin: 20px 0;
 }
