@@ -845,6 +845,7 @@ body {
     flex-direction: column;
     align-items: center;
     z-index: 1000; /* Ensure menu is above other content */
+    overflow-y: auto;
 }
 
 #logo {
@@ -872,6 +873,7 @@ body {
     color: white;
     text-decoration: none;
     background-color: #333;
+    border-bottom: 1px solid #444;
 }
 
 .main-menu > li > a:hover {
@@ -888,6 +890,11 @@ body {
     top: 0;
     width: 200px;
     background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1001;
+}
+
+.sub-menu > li {
+    border-bottom: 1px solid #444;
 }
 
 .sub-menu > li > a {

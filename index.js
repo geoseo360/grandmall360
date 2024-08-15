@@ -388,5 +388,23 @@
 
   // Display the initial scene.
   switchScene(scenes[0]);
+document.addEventListener('DOMContentLoaded', function() {
+    const sceneElements = document.querySelectorAll('.scene');
+    sceneElements.forEach(element => {
+        element.addEventListener('click', function() {
+            const sceneId = this.getAttribute('data-id');
+            // Replace this with the logic to switch scenes
+            console.log('Switching to scene:', sceneId);
+        });
+    });
+
+    // Optional: Toggle menu visibility
+    const menuToggle = document.getElementById('menuToggle');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('open');
+        });
+    }
+});
 
 })();
