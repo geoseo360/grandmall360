@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Grand Mall Demo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
     <style> @-ms-viewport { width: device-width; } </style>
     <link rel="stylesheet" href="vendor/reset.min.css">
     <link rel="stylesheet" href="style.css">
@@ -20,24 +20,12 @@
             <li>
                 <a href="#" id="menuToggle">Scenes</a>
                 <ul class="sub-menu" id="sceneList">
-                    <a href="javascript:void(0)" class="scene" data-id="0-3rd-floor">
-                        <li class="text">3rd floor</li>
-                    </a>
-                    <a href="javascript:void(0)" class="scene" data-id="1-berghoff-store">
-                        <li class="text">BergHOFF store</li>
-                    </a>
-                    <a href="javascript:void(0)" class="scene" data-id="2-berghoff">
-                        <li class="text">BergHOFF</li>
-                    </a>
-                    <a href="javascript:void(0)" class="scene" data-id="3-mok-coffee-1">
-                        <li class="text">MOK Coffee 1</li>
-                    </a>
-                    <a href="javascript:void(0)" class="scene" data-id="4-mok-coffee-guest-area">
-                        <li class="text">MOK Coffee guest area</li>
-                    </a>
-                    <a href="javascript:void(0)" class="scene" data-id="5-mok-coffee">
-                        <li class="text">MOK Coffee</li>
-                    </a>
+                    <li><a href="javascript:void(0)" class="scene" data-id="0-3rd-floor">3rd floor</a></li>
+                    <li><a href="javascript:void(0)" class="scene" data-id="1-berghoff-store">BergHOFF store</a></li>
+                    <li><a href="javascript:void(0)" class="scene" data-id="2-berghoff">BergHOFF</a></li>
+                    <li><a href="javascript:void(0)" class="scene" data-id="3-mok-coffee-1">MOK Coffee 1</a></li>
+                    <li><a href="javascript:void(0)" class="scene" data-id="4-mok-coffee-guest-area">MOK Coffee guest area</a></li>
+                    <li><a href="javascript:void(0)" class="scene" data-id="5-mok-coffee">MOK Coffee</a></li>
                 </ul>
             </li>
             <li><a href="#">About</a></li>
@@ -56,36 +44,36 @@
 
     <!-- Controls -->
     <a href="javascript:void(0)" id="autorotateToggle">
-        <img class="icon off" src="img/play.png">
-        <img class="icon on" src="img/pause.png">
+        <img class="icon off" src="img/play.png" alt="Play">
+        <img class="icon on" src="img/pause.png" alt="Pause">
     </a>
     <a href="javascript:void(0)" id="fullscreenToggle">
-        <img class="icon off" src="img/fullscreen.png">
-        <img class="icon on" src="img/windowed.png">
+        <img class="icon off" src="img/fullscreen.png" alt="Fullscreen">
+        <img class="icon on" src="img/windowed.png" alt="Windowed">
     </a>
     <a href="javascript:void(0)" id="sceneListToggle">
-        <img class="icon off" src="img/expand.png">
-        <img class="icon on" src="img/collapse.png">
+        <img class="icon off" src="img/expand.png" alt="Expand">
+        <img class="icon on" src="img/collapse.png" alt="Collapse">
     </a>
 
     <!-- View control buttons -->
     <a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
-        <img class="icon" src="img/up.png">
+        <img class="icon" src="img/up.png" alt="View Up">
     </a>
     <a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
-        <img class="icon" src="img/down.png">
+        <img class="icon" src="img/down.png" alt="View Down">
     </a>
     <a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
-        <img class="icon" src="img/left.png">
+        <img class="icon" src="img/left.png" alt="View Left">
     </a>
     <a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
-        <img class="icon" src="img/right.png">
+        <img class="icon" src="img/right.png" alt="View Right">
     </a>
     <a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
-        <img class="icon" src="img/plus.png">
+        <img class="icon" src="img/plus.png" alt="View In">
     </a>
     <a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
-        <img class="icon" src="img/minus.png">
+        <img class="icon" src="img/minus.png" alt="View Out">
     </a>
 
     <script src="vendor/screenfull.min.js"></script>
